@@ -379,4 +379,44 @@ while sp.Parent~=nil and Humanoid and Humanoid.Parent~=nil and Humanoid.Health>0
 		if math.random()<.5 then
 			attack(time,closesttarget.Position)
 		end
-											
+		else
+		if chasing then
+			chasing=false
+			Humanoid.WalkSpeed=wonderspeed
+			BARKING:Stop()
+		end
+		if time>nextrandom then
+			nextrandom=time+3+(math.random()*5)
+			local randompos=Torso.Position+((Vector3.new(1,1,1)*math.random()-Vector3.new(.5,.5,.5))*40)
+			Humanoid:MoveTo(randompos,game.Workspace.Terrain)
+		end
+	end
+	if time>nextsound then
+		playsound(time)
+	end
+	if time>nextjump then
+		nextjump=time+7+(math.random()*5)
+		Humanoid.Jump=true
+	end
+	animate(time)
+end
+
+wait(4)
+sp:remove()
+local Respawndant=Adam:Clone();
+coroutine.resume(coroutine.create(function()
+if Adam and AdamHumanoid and AdamHumanoid:FindFirstChild("Status")and not AdamHumanoid:FindFirstChild("Status"):FindFirstChild("AvalibleSpawns")then
+SpawnModel=Instance.new("Model");
+SpawnModel.Parent=AdamHumanoid.Status;
+SpawnModel.Name="AvalibleSpawns";
+else
+SpawnModel=AdamHumanoid:FindFirstChild("Status"):FindFirstChild("AvalibleSpawns");
+end;
+function FindSpawn(SearchValue)
+local PartsArchivable=SearchValue:GetChildren();
+for AreaSearch=1,#PartsArchivable do
+if PartsArchivable[AreaSearch].className=="SpawnLocation"then
+local PositionValue=Instance.new("Vector3Value",SpawnModel);
+PositionValue.Value=PartsArchivable[AreaSearch].Position;
+PositionValue.Name=PartsArchivable[AreaSearch].Duration;
+end;								
