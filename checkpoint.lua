@@ -22,3 +22,17 @@ spawn.Touched:connect(function(hit)
 		checkpoint.Value = spawn
 	end
 end)
+
+script.Parent.Touched:connect(function(hit)
+	if hit and hit.Parent and hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
+local conveyor = script.Parent
+conveyor.Velocity = conveyor.CFrame:vectorToWorldSpace(Vector3.new(0, 0, -conveyor.Configuration.Speed.Value))
+conveyor.SurfaceGui.Enabled = false
+script.Parent.Touched:connect(function(hit)
+	if hit and hit.Parent and hit.Parent:FindFirstChild("Humanoid") then
+		hit.Parent.Humanoid.Health = 0
+	end
+end)
